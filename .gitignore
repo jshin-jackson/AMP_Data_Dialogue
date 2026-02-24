@@ -61,3 +61,6 @@ package-lock.json
 # 🚀 CAI build files (optional)
 cdsw-build.sh
 *.pyc
+
+# Project Zip File
+AMP_Data_Dialogue.zip
