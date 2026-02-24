@@ -34,9 +34,12 @@ def display_message(msg, index):
                     with tabs[1]:
                         st.code(content["query"], language="sql")
                     with tabs[2]:
-                        st.components.v1.html(  # type:ignore
-                            content["chart"], height=400, scrolling=True
-                        )  # type:ignore
+                        if content.get("chart"):
+                            st.components.v1.html(  # type:ignore
+                                content["chart"], height=400, scrolling=True
+                            )
+                        else:
+                            st.info("No chart available for this query.")
 
 
 def main():
@@ -196,7 +199,8 @@ def main():
         and st.session_state["messages"][-1]["role"] == "user"
     ):
         user_query = st.session_state["messages"][-1]["content"]
-        response_dict = execute_sql_query(user_query)
+        with st.spinner("Analyzing your question..."):
+            response_dict = execute_sql_query(user_query)
         st.session_state["messages"].append(
             {"role": "assistant", "content": response_dict}
         )
