@@ -1,0 +1,63 @@
+# 🔐 Environment variables & secrets
+.env
+config.toml
+
+# 📦 Python dependencies & build artifacts
+*.egg-info/
+*.whl
+dist/
+build/
+pip-wheel-metadata/
+
+# 🧠 Python bytecode/cache
+__pycache__/
+*.py[cod]
+*.pyd
+
+# 📒 Jupyter notebooks & checkpoints
+*.ipynb
+.ipynb_checkpoints/
+
+# 📁 Application data & generated files
+# Keep the folders, ignore files inside them
+assets/data/audio/*
+assets/data/images/*
+assets/data/text/*
+
+# But do not ignore the folders themselves (allow them to stay in Git)
+!assets/data/audio/
+!assets/data/images/
+!assets/data/text/
+
+temp/
+*.log
+*.tmp
+*.bak
+
+# 📝 Logs and temporary scripts
+*.log
+*.out
+temp.py
+server.log
+*.DS_Store
+
+# Ignore template/sample files if needed
+*.mp3
+*.png
+*.docx
+
+# 📄 Output documents (optional)
+*.pdf
+
+# ⚙️ Editor & IDE settings
+.vscode/
+.idea/
+*.code-workspace
+
+# 🌐 Node modules & frontend dependencies (if any)
+node_modules/
+package-lock.json
+
+# 🚀 CAI build files (optional)
+cdsw-build.sh
+*.pyc

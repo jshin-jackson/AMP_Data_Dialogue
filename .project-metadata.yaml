@@ -1,0 +1,42 @@
+name: Data Dialogue
+description: Run a Streamlit-based database assistant that enables natural language querying of structured data using agentic AI.
+author: Cloudera Inc.
+specification_version: 1.0
+prototype_version: 2.0
+date: "2025-09-30"
+
+environment_variables:
+  OPENAI_API_KEY:
+    description: >-
+      API key for OpenAI service.
+  OPENAI_BASE_URL:
+    default: "https://api.openai.com/v1"
+    required: true
+    description: >-
+      Endpoint for the OpenAI service. Only required is using a private OpenAI compatible endpoint.
+  DATABASE_URI:
+    default: "sqlite:///sample_sqlite.db"
+    required: true
+    description: >-
+      Database connection string.
+  
+runtimes:
+  - editor: PBJ Workbench
+    kernel: Python 3.11
+    edition: Standard
+
+tasks:
+  - type: run_session
+    name: "Install Dependencies"
+    script: 0_install-dependencies/install-dependencies.py
+    kernel: python3
+    cpu: 1
+    memory: 4
+
+  - type: start_application
+    name: "Data Dialogue"
+    subdomain: data-dialogue
+    script: 1_job-run-python-job/job.py
+    short_summary: Start Data Dialogue application
+    cpu: 2
+    memory: 8

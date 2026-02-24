@@ -1,0 +1,30 @@
+name: Community
+
+entries:
+  - title: Data Dialogue
+    label: AMP_Data_Dialogue
+    short_description: |
+      A Streamlit-based agentic AMP that enables users to query databases through natural language and receive summarized, visual responses.
+    long_description: |
+      Data Dialogue is an AMP that turns natural language queries into data-driven insights. It leverages LangChain, SQL generation models, 
+      and modular agents to interpret user questions, generate SQL, execute against a database, and return results in markdown or visual format. 
+      Designed for SMEs, analysts, and executives who want fast, accessible data access without writing SQL.
+    long_description_html: |
+      <p>
+        <strong>Data Dialogue</strong> is an AMP that turns natural language queries into data-driven insights. 
+        It leverages <em>LangChain</em>, SQL generation models, and modular agents to interpret user questions, 
+        generate SQL, execute against a database, and return results in markdown or visual format. 
+        Designed for SMEs, analysts, and executives who want fast, accessible data access without writing SQL.
+      </p>
+    image_path: >-
+      https://raw.githubusercontent.com/masorg/AMP_Data_Dialogue/main/assets/images/cover.png
+    tags:
+      - Data Assistant
+      - SQL Generation
+      - LangChain
+      - Business Intelligence
+      - Agentic AI
+    git_url: 'https://github.com/masorg/AMP_Data_Dialogue'
+    is_prototype: true
+    is_community: false
+    is_new: true
