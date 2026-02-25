@@ -29,7 +29,12 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain.callbacks.base import BaseCallbackHandler
+from langchain_core.caches import BaseCache  # noqa: F401 – pydantic 2.11.x forward-ref 해결용
 from langchain_openai import ChatOpenAI
+
+# pydantic 2.11.x 에서 ChatOpenAI 의 BaseCache forward reference 가 자동으로
+# resolve 되지 않는 문제를 수동으로 해결합니다.
+ChatOpenAI.model_rebuild()
 
 from src.config import SETTINGS
 from src.database import get_db
