@@ -38,4 +38,4 @@
 #
 # ###########################################################################
 
-!streamlit run /home/cdsw/AMP_Data_Dialogue/3_app/app.py --server.port $CDSW_APP_PORT --server.address 127.0.0.1
+!streamlit run 3_app/app.py --server.port $CDSW_APP_PORT --server.address 127.0.0.1

@@ -30,7 +30,7 @@ tasks:
     name: "Install Dependencies"
     script: 0_install-dependencies/install-dependencies.py
     kernel: python3
-    cpu: 1
+    cpu: 2
     memory: 4
 
   - type: start_application
