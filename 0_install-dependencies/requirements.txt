@@ -77,7 +77,7 @@ annotated-types==0.7.0
 
 # ── Streamlit 의존성 ──────────────────────────────────────────────
 pandas==2.2.3
-numpy==2.2.3
+numpy==1.26.4
 pyarrow==19.0.1
 pydeck==0.9.1
 pillow==11.1.0
