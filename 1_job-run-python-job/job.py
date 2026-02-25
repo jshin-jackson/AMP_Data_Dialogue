@@ -38,12 +38,4 @@
 #
 # ###########################################################################
 
-import os
-import subprocess
-
-subprocess.run([
-    "streamlit", "run",
-    "/home/cdsw/AMP_Data_Dialogue/3_app/app.py",
-    "--server.port", os.environ["CDSW_APP_PORT"],
-    "--server.address", "127.0.0.1"
-], check=True)
+!streamlit run /home/cdsw/AMP_Data_Dialogue/3_app/app.py --server.port $CDSW_APP_PORT --server.address 127.0.0.1
