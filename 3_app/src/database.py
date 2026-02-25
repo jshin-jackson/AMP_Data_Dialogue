@@ -108,11 +108,24 @@ def get_db() -> SQLDatabase | None:
     """
     try:
         uri = _get_database_uri()
+        # #region agent log A/C
+        import json, time, os
+        _lp = "/home/cdsw/AMP_Data_Dialogue/.cursor/debug-34f59c.log"
+        os.makedirs(os.path.dirname(_lp), exist_ok=True)
+        open(_lp, "a").write(json.dumps({"sessionId":"34f59c","hypothesisId":"A_C","location":"database.py:get_db","message":"DB URI resolved","data":{"uri": uri, "cwd": os.getcwd()},"timestamp":int(time.time()*1000)}) + "\n")
+        # #endregion
         db = SQLDatabase.from_uri(uri, engine_args={"echo": False})
+        # #region agent log A/C success
+        open(_lp, "a").write(json.dumps({"sessionId":"34f59c","hypothesisId":"A_C","location":"database.py:get_db","message":"DB connected OK","data":{"uri": uri},"timestamp":int(time.time()*1000)}) + "\n")
+        # #endregion
         logger.info("데이터베이스 연결에 성공했습니다.")
         return db
     except Exception as e:
-        # 연결 실패 시 None 을 반환해 에이전트 초기화 단계에서
-        # 안전하게 처리할 수 있도록 합니다.
+        # #region agent log A/C fail
+        import json, time, os
+        _lp = "/home/cdsw/AMP_Data_Dialogue/.cursor/debug-34f59c.log"
+        os.makedirs(os.path.dirname(_lp), exist_ok=True)
+        open(_lp, "a").write(json.dumps({"sessionId":"34f59c","hypothesisId":"A_C","location":"database.py:get_db","message":"DB connection FAILED","data":{"error": str(e)},"timestamp":int(time.time()*1000)}) + "\n")
+        # #endregion
         logger.error(f"데이터베이스 연결 실패: {e}")
         return None
