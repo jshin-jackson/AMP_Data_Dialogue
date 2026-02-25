@@ -31,7 +31,7 @@ tasks:
     script: 0_install-dependencies/install-dependencies.py
     kernel: python3
     cpu: 2
-    memory: 4
+    memory: 8
 
   - type: start_application
     name: "Data Dialogue"
