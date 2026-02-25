@@ -1,6 +1,0 @@
-{
-  "exclude": [
-    "0_install-dependencies/install-dependencies.py",
-    "1_job-run-python-job/job.py"
-  ]
-}
