@@ -22,7 +22,13 @@ IS_REMOTE_DB = os.getenv("IS_REMOTE_DB", "false").lower().strip() == "true"
 
 # 로컬 DB 접속 URI (SQLAlchemy 형식)
 # 예: sqlite:///sample_sqlite.db, postgresql://user:pw@host:5432/dbname
-DATABASE_URI = os.getenv("DATABASE_URI", "sqlite:///sample_sqlite.db")
+# CDSW 환경이면 /home/cdsw/sample_sqlite.db, 로컬이면 프로젝트 루트 기준 경로 사용
+_DEFAULT_DB_PATH = (
+    "/home/cdsw/sample_sqlite.db"
+    if os.path.exists("/home/cdsw")
+    else os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "sample_sqlite.db")
+)
+DATABASE_URI = os.getenv("DATABASE_URI", f"sqlite:///{_DEFAULT_DB_PATH}")
 
 # ── SSH 터널 설정 (IS_REMOTE_DB=true 일 때만 사용) ────────────────────────
 SSH_HOST = os.getenv("SSH_HOST", "")          # SSH 서버 호스트 주소

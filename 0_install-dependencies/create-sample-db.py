@@ -37,7 +37,8 @@ def load_csv_into_sqlite(db_name, csv_file_path, table_name):
       print(f"Error: CSV file not found at '{csv_file_path}'.")
   except sqlite3.OperationalError as e:
       print(f"SQLite Operational Error (e.g., table not found, column mismatch): {e}")
-      print(f"Attempted SQL: {insert_sql}")
+      if 'insert_sql' in dir():
+          print(f"Attempted SQL: {insert_sql}")
   except Exception as e:
       print(f"An unexpected error occurred during data loading: {e}")
   finally:
@@ -237,20 +238,26 @@ def create_sqlite_database(db_name="sample_sqlite.db"):
       if conn:
           conn.close()
 
-db = "/home/cdsw/sample_sqlite.db"
+# CDSW 환경이면 /home/cdsw, 로컬이면 이 스크립트 기준 프로젝트 루트를 사용합니다.
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_PROJECT_ROOT = os.path.dirname(_SCRIPT_DIR)
+BASE_DIR = "/home/cdsw" if os.path.exists("/home/cdsw") else _PROJECT_ROOT
+
+db = os.path.join(BASE_DIR, "sample_sqlite.db")
+CSV_DIR = os.path.join(BASE_DIR, "0_install-dependencies", "sample_data_csv")
 
 if os.path.exists(db):
     os.remove(db)
 
 create_sqlite_database(db)
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/01_account.csv", "account")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/02_district.csv", "district")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/03_account.csv", "account")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/04_card.csv", "card")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/05_client.csv", "client")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/06_crmcallcentrelog.csv", "CRMCallCenterLogs")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/07_crmevents.csv", "CRMEvents")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/08_crmreviews.csv", "CRMReviews")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/09_disposition.csv", "disposition")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/10_loan.csv", "loan")
-load_csv_into_sqlite(db, "/home/cdsw/0_install-dependencies/sample_data_csv/11_transaction.csv", "bank_transactions")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "01_account.csv"), "account")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "02_district.csv"), "district")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "03_account.csv"), "account")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "04_card.csv"), "card")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "05_client.csv"), "client")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "06_crmcallcentrelog.csv"), "CRMCallCenterLogs")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "07_crmevents.csv"), "CRMEvents")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "08_crmreviews.csv"), "CRMReviews")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "09_disposition.csv"), "disposition")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "10_loan.csv"), "loan")
+load_csv_into_sqlite(db, os.path.join(CSV_DIR, "11_transaction.csv"), "bank_transactions")

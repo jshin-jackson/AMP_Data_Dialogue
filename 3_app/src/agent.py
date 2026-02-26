@@ -34,7 +34,11 @@ from langchain_openai import ChatOpenAI
 
 # pydantic 2.11.x 에서 ChatOpenAI 의 BaseCache forward reference 가 자동으로
 # resolve 되지 않는 문제를 수동으로 해결합니다.
-ChatOpenAI.model_rebuild()
+# _types_namespace 로 BaseCache 를 명시적으로 제공해야 합니다.
+try:
+    ChatOpenAI.model_rebuild(_types_namespace={"BaseCache": BaseCache})
+except Exception:
+    ChatOpenAI.model_rebuild()
 
 from src.config import SETTINGS
 from src.database import get_db
