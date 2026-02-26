@@ -221,12 +221,6 @@ def _get_agent_and_llm():
     """
     # DB 연결 확인 (get_db() 도 cache_resource 로 캐싱됨)
     db = get_db()
-    # #region agent log A/B
-    import json, time, os
-    _lp = "/home/cdsw/AMP_Data_Dialogue/.cursor/debug-34f59c.log"
-    os.makedirs(os.path.dirname(_lp), exist_ok=True)
-    open(_lp, "a").write(json.dumps({"sessionId":"34f59c","hypothesisId":"A_B","location":"agent.py:_get_agent_and_llm","message":"get_db result","data":{"db_is_none": db is None, "api_key_set": bool(SETTINGS.get("OPENAI_API_KEY")), "base_url": SETTINGS.get("OPENAI_BASE_URL",""), "model": SETTINGS.get("OPENAI_MODEL_NAME","")},"timestamp":int(time.time()*1000)}) + "\n")
-    # #endregion
     if db is None:
         logger.error("DB 연결 없이 에이전트를 초기화할 수 없습니다.")
         return None, None
@@ -252,11 +246,6 @@ def _get_agent_and_llm():
         return agent_executor, llm
 
     except Exception as e:
-        # #region agent log B/D
-        import json, time, os
-        _lp = "/home/cdsw/AMP_Data_Dialogue/.cursor/debug-34f59c.log"
-        open(_lp, "a").write(json.dumps({"sessionId":"34f59c","hypothesisId":"B_D","location":"agent.py:_get_agent_and_llm","message":"agent init FAILED","data":{"error": str(e), "error_type": type(e).__name__},"timestamp":int(time.time()*1000)}) + "\n")
-        # #endregion
         logger.error(f"에이전트 초기화 실패: {e}")
         return None, None
 
